@@ -12,6 +12,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
+  late Animation<dynamic> animation;
 
   @override
   void initState() {
@@ -23,13 +24,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       duration: Duration(seconds: 1),
     );
 
-    
+    animation =
+        ColorTween(begin: Colors.red, end: Colors.blue).animate(controller);
+
+    controller.forward();
+
+    controller.addListener(() {
+      setState(() {});
+      print(animation.value);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
