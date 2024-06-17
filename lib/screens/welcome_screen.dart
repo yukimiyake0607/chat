@@ -70,12 +70,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ),
             WelcomeScreenButton(
               title: 'Log In',
-              navigationScreenTitle: LoginScreen.id,
+              onPressed: () {
+                Navigator.pushNamed(context, LoginScreen.id);
+              },
               buttonColor: Colors.lightBlueAccent,
             ),
             WelcomeScreenButton(
               title: 'Register',
-              navigationScreenTitle: RegistrationScreen.id,
+              onPressed: () {
+                Navigator.pushNamed(context, WelcomeScreen.id);
+              },
               buttonColor: Colors.blue,
             ),
           ],
