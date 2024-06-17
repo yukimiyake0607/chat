@@ -25,6 +25,9 @@ class ScreenButton extends StatelessWidget {
           height: 42.0,
           child: Text(
             title,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
       ),
