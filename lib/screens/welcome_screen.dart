@@ -1,7 +1,7 @@
 import 'package:chat/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import '../components/welcome_screen_button.dart';
+import '../components/screen_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String id = 'welcome_screen';

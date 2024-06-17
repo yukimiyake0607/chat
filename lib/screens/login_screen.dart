@@ -1,4 +1,4 @@
-import 'package:chat/components/welcome_screen_button.dart';
+import 'package:chat/components/screen_button.dart';
 import 'package:chat/constants.dart';
 import 'package:flutter/material.dart';
 
