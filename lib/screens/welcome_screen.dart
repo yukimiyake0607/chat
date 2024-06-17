@@ -1,4 +1,5 @@
 import 'package:chat/screens/login_screen.dart';
+import 'package:chat/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import '../components/screen_button.dart';
@@ -77,7 +78,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ScreenButton(
               title: 'Register',
               onPressed: () {
-                Navigator.pushNamed(context, WelcomeScreen.id);
+                Navigator.pushNamed(context, RegistrationScreen.id);
               },
               buttonColor: Colors.blue,
             ),
