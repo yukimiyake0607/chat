@@ -76,7 +76,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 24.0,
             ),
-            WelcomeScreenButton(
+            ScreenButton(
                 title: 'Register',
                 onPressed: () {},
                 buttonColor: Colors.blueAccent),

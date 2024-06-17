@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class WelcomeScreenButton extends StatelessWidget {
+class ScreenButton extends StatelessWidget {
   final String title;
   final void Function()? onPressed;
   final Color buttonColor;
-  const WelcomeScreenButton({
+  const ScreenButton({
     super.key,
     required this.title,
     required this.onPressed,
