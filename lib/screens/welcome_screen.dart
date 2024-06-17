@@ -23,9 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       vsync: this,
       duration: Duration(seconds: 1),
     );
-
     controller.forward();
-
     controller.addListener(() {
       setState(() {});
     });
