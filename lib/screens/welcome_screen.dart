@@ -2,6 +2,7 @@ import 'package:chat/screens/login_screen.dart';
 import 'package:chat/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import '../components/welcome_screen_button.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String id = 'welcome_screen';
@@ -84,36 +85,3 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 }
 
-class WelcomeScreenButton extends StatelessWidget {
-  final String title;
-  final String navigationScreenTitle;
-  final Color buttonColor;
-  const WelcomeScreenButton({
-    super.key,
-    required this.title,
-    required this.navigationScreenTitle,
-    required this.buttonColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Material(
-        elevation: 5.0,
-        color: buttonColor,
-        borderRadius: BorderRadius.circular(30.0),
-        child: MaterialButton(
-          onPressed: () {
-            Navigator.pushNamed(context, navigationScreenTitle);
-          },
-          minWidth: 200.0,
-          height: 42.0,
-          child: Text(
-            title,
-          ),
-        ),
-      ),
-    );
-  }
-}
