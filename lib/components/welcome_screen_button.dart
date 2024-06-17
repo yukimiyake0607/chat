@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class WelcomeScreenButton extends StatelessWidget {
   final String title;
-  final String navigationScreenTitle;
+  final void Function()? onPressed;
   final Color buttonColor;
   const WelcomeScreenButton({
     super.key,
     required this.title,
-    required this.navigationScreenTitle,
+    required this.onPressed,
     required this.buttonColor,
   });
 
@@ -20,9 +20,7 @@ class WelcomeScreenButton extends StatelessWidget {
         color: buttonColor,
         borderRadius: BorderRadius.circular(30.0),
         child: MaterialButton(
-          onPressed: () {
-            Navigator.pushNamed(context, navigationScreenTitle);
-          },
+          onPressed: onPressed,
           minWidth: 200.0,
           height: 42.0,
           child: Text(
