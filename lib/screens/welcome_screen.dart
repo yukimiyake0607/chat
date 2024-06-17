@@ -33,7 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -56,7 +56,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       textStyle: const TextStyle(
                         fontSize: 45,
                         fontWeight: FontWeight.w900,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       speed: const Duration(milliseconds: 250),
                     ),
@@ -84,4 +84,3 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     );
   }
 }
-
