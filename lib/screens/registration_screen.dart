@@ -32,6 +32,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+              keyboardType: TextInputType.emailAddress,
               onChanged: (value) {
                 email = value;
               },
@@ -42,6 +43,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 8.0,
             ),
             TextField(
+              obscureText: true,
               onChanged: (value) {
                 password = value;
               },
@@ -53,7 +55,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             ScreenButton(
                 title: 'Register',
-                onPressed: () {},
+                onPressed: () {
+                  print(email);
+                  print(password);
+                },
                 buttonColor: Colors.blueAccent),
           ],
         ),
