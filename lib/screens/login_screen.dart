@@ -1,5 +1,7 @@
 import 'package:chat/components/screen_button.dart';
 import 'package:chat/constants.dart';
+import 'package:chat/screens/chat_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,8 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late final String email;
-  late final String password;
+  String email = '';
+  String password = '';
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +58,17 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ScreenButton(
                 title: 'LogIn',
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    if (user != null) {
+                      Navigator.pushNamed(context, ChatScreen.id);
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                },
                 buttonColor: Colors.lightBlueAccent),
           ],
         ),
