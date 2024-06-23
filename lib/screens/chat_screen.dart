@@ -138,3 +138,26 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+
+class MessageBubble extends StatelessWidget {
+  String text;
+  String sender;
+  MessageBubble({super.key, required this.text, required this.sender});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Material(
+        color: Colors.lightBlueAccent,
+        child: Text(
+          '$text from $sender',
+          style: const TextStyle(
+            fontSize: 50,
+          ),
+        ),
+      ),
+    );
+    ;
+  }
+}
