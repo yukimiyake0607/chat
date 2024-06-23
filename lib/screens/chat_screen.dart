@@ -82,17 +82,25 @@ class _ChatScreenState extends State<ChatScreen> {
                   );
                 }
 
-                final messages = snapshot.data!.docs;
-                List<Text> messageWidgets = [];
-                for (var message in messages) {
-                  final messageText = message.data() as Map<String, dynamic>;
-                  final text = messageText['text'];
-                  final sender = messageText['sender'];
-                  final messageWidget = Text('$text from $sender');
-                  messageWidgets.add(messageWidget);
+                final messages = snapshot.data?.docs;
+                List<MessageBubble> messageBubbles = [];
+                if (messages != null) {
+                  for (var message in messages) {
+                    final messageText = message.data() as Map<String, dynamic>;
+                    final text = messageText['text'];
+                    final sender = messageText['sender'];
+                    final messageBubble =
+                        MessageBubble(text: text, sender: sender);
+                    messageBubbles.add(messageBubble);
+                  }
                 }
-                return Column(
-                  children: messageWidgets,
+                return Expanded(
+                  child: ListView(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                    physics: AlwaysScrollableScrollPhysics(),
+                    children: messageBubbles,
+                  ),
                 );
               },
             ),
