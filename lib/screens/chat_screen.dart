@@ -28,9 +28,23 @@ class _ChatScreenState extends State<ChatScreen> {
     if (user != null) {
       try {
         loggedInUser = user;
-        print(loggedInUser.email);
       } catch (e) {
         print(e);
+      }
+    }
+  }
+
+  void getMessages() async {
+    final messages = await _fireStore.collection('messages').get();
+    for (var message in messages.docs) {
+      print(message.data());
+    }
+  }
+
+  void messageStream() async {
+    await for (var snapshot in _fireStore.collection('messages').snapshots()) {
+      for (var message in snapshot.docs) {
+        print(message.data());
       }
     }
   }
