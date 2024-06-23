@@ -111,7 +111,7 @@ class messagesStream extends StatelessWidget {
           );
         }
 
-        final messages = snapshot.data?.docs;
+        final messages = snapshot.data?.docs.reversed;
         List<MessageBubble> messageBubbles = [];
         if (messages != null) {
           for (var message in messages) {
@@ -131,6 +131,7 @@ class messagesStream extends StatelessWidget {
         }
         return Expanded(
           child: ListView(
+            reverse: true,
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
             physics: AlwaysScrollableScrollPhysics(),
             children: messageBubbles,
