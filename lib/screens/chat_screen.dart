@@ -4,6 +4,8 @@ import '../constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+final _fireStore = FirebaseFirestore.instance;
+
 class ChatScreen extends StatefulWidget {
   static String id = 'chat_screen';
   @override
@@ -12,7 +14,6 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
-  final _fireStore = FirebaseFirestore.instance;
   late User loggedInUser;
   String messageText = '';
 
@@ -71,39 +72,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-              stream: _fireStore.collection('messages').snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  const Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.lightBlueAccent,
-                    ),
-                  );
-                }
-
-                final messages = snapshot.data?.docs;
-                List<MessageBubble> messageBubbles = [];
-                if (messages != null) {
-                  for (var message in messages) {
-                    final messageText = message.data() as Map<String, dynamic>;
-                    final text = messageText['text'];
-                    final sender = messageText['sender'];
-                    final messageBubble =
-                        MessageBubble(text: text, sender: sender);
-                    messageBubbles.add(messageBubble);
-                  }
-                }
-                return Expanded(
-                  child: ListView(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                    physics: AlwaysScrollableScrollPhysics(),
-                    children: messageBubbles,
-                  ),
-                );
-              },
-            ),
+            messagesStream(),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -136,6 +105,47 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
     );
+  }
+}
+
+class messagesStream extends StatelessWidget {
+  const messagesStream({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+              stream: _fireStore.collection('messages').snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  const Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.lightBlueAccent,
+                    ),
+                  );
+                }
+
+                final messages = snapshot.data?.docs;
+                List<MessageBubble> messageBubbles = [];
+                if (messages != null) {
+                  for (var message in messages) {
+                    final messageText = message.data() as Map<String, dynamic>;
+                    final text = messageText['text'];
+                    final sender = messageText['sender'];
+                    final messageBubble =
+                        MessageBubble(text: text, sender: sender);
+                    messageBubbles.add(messageBubble);
+                  }
+                }
+                return Expanded(
+                  child: ListView(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                    physics: AlwaysScrollableScrollPhysics(),
+                    children: messageBubbles,
+                  ),
+                );
+              },
+            );
   }
 }
 
