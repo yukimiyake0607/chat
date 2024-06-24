@@ -78,6 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       _fireStore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
+                        'timestamp': FieldValue.serverTimestamp(),
                       });
                     },
                     child: Text(
@@ -101,7 +102,10 @@ class messagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _fireStore.collection('messages').snapshots(),
+      stream: _fireStore
+          .collection('messages')
+          .orderBy('timestamp', descending: false)
+          .snapshots(), // タイムスタンプで並べ替え
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           const Center(
